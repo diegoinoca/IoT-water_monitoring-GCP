@@ -181,16 +181,20 @@ output:
 deploy-dataflow:
 	@echo "$(BLUE)[INFO]$(NC) Desplegando pipeline de Dataflow..."
 	@echo "$(BLUE)[INFO]$(NC) Configurando entorno virtual Python..."
-	@if [ ! -d "dataflow-pipeline/venv" ]; then \
-		echo "$(YELLOW)[!]$(NC) Creando entorno virtual..."; \
-		cd dataflow-pipeline && python3.11 -m venv venv; \
+	@if [ -d "dataflow-pipeline/venv" ]; then \
+		echo "$(YELLOW)[!]$(NC) Eliminando entorno virtual antiguo..."; \
+		rm -rf dataflow-pipeline/venv; \
 	fi
+	@echo "$(YELLOW)[!]$(NC) Creando entorno virtual limpio con Python 3.11..."; \
+	python3.11 -m venv dataflow-pipeline/venv
 	@echo "$(BLUE)[INFO]$(NC) Instalando dependencias..."
-	@cd dataflow-pipeline && . venv/bin/activate && pip install --upgrade pip setuptools wheel -q && pip install -r requirements.txt -q
+	@cd dataflow-pipeline && \
+		./venv/bin/pip install --upgrade pip setuptools wheel -q && \
+		./venv/bin/pip install -r requirements.txt -q
 	@echo "$(BLUE)[INFO]$(NC) Iniciando deployment del pipeline..."
 	@SUBSCRIPTION_ID=$$(cd terraform && terraform output -json 2>/dev/null | python3 -c "import sys, json; print(json.load(sys.stdin)['telemetry_subscription_id']['value'])" 2>/dev/null || echo "projects/$(PROJECT_ID)/subscriptions/sensor-telemetry-dataflow-sub"); \
 	TEMP_BUCKET=$$(cd terraform && terraform output -json 2>/dev/null | python3 -c "import sys, json; print(json.load(sys.stdin)['temp_bucket_name']['value'])" 2>/dev/null || echo "$(PROJECT_ID)-dataflow-temp"); \
-	cd dataflow-pipeline && . venv/bin/activate && python3.11 pipeline.py \
+	cd dataflow-pipeline && ./venv/bin/python3 pipeline.py \
 		--project=$(PROJECT_ID) \
 		--region=$(REGION) \
 		--zone=$(REGION)-f \
