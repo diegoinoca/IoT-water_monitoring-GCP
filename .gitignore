@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+terraform.tfvars
+
+# Secrets y API Keys
+.env
+*.pem
+*.key
+.api_key
+outputs.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos obsoletos de IoT Core (deprecado)
+arduino-code/sensor_mqtt/
+ciotc_config.h
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+*.zip
