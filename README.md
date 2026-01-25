@@ -39,6 +39,9 @@ trabajofinalv2/
 │   ├── requirements.txt              # Dependencias Python
 │   └── setup.py                      # Setup del pipeline
 ├── cloud-functions/                  # Cloud Functions
+│   ├── iot-http-proxy/               # Proxy HTTP para dispositivos IoT
+│   │   ├── main.py
+│   │   └── requirements.txt
 │   ├── alert-processor/              # Procesador de alertas
 │   │   ├── main.py
 │   │   └── requirements.txt
