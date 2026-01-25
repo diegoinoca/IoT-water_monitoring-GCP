@@ -62,14 +62,6 @@ trabajofinalv2/
 │   └── cleanup.sh                    # Limpieza de recursos
 ```
 
-## 🚀 Inicio Rápido
-
-> **Sistema ya configurado?** Ver [QUICK_START.md](QUICK_START.md) para uso inmediato.
->
-> **Ver dashboards:** [DASHBOARDS.md](DASHBOARDS.md)
->
-> **Configuración completa:** [CONFIGURACION_COMPLETA.md](CONFIGURACION_COMPLETA.md)
-
 ### Prerrequisitos
 
 - Cuenta de Google Cloud Platform
